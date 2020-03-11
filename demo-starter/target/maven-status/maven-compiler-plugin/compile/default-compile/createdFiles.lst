@@ -1,0 +1,9 @@
+com\gupao\edu\App.class
+com\gupao\edu\autoconfiguration\HelloAutoConfiguration.class
+com\gupao\edu\autoconfiguration\HelloProperties.class
+com\gupao\edu\format\JsonFormatProcessor.class
+com\gupao\edu\autoconfiguration\FormatAutoConfiguration.class
+com\gupao\edu\template\FormatTemplate.class
+com\gupao\edu\format\FormatProcessor.class
+com\gupao\edu\format\StringFormatProcessor.class
+META-INF\spring-configuration-metadata.json

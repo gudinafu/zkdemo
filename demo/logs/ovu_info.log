@@ -1,0 +1,5 @@
+2020-02-27 15:07:09.686 [restartedMain] INFO  com.ldh.DemoApplication - Starting DemoApplication on CHINA-20190323H with PID 9464 (H:\exercise\demo\target\classes started by Administrator in H:\exercise\demo)
+2020-02-27 15:07:09.693 [restartedMain] INFO  com.ldh.DemoApplication - No active profile set, falling back to default profiles: default
+2020-02-27 15:07:16.864 [restartedMain] INFO  com.ldh.DemoApplication - Started DemoApplication in 8.993 seconds (JVM running for 15.724)
+2020-02-27 15:27:00.050 [http-nio-5555-exec-24] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-02-27 15:27:00.934 [http-nio-5555-exec-24] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.

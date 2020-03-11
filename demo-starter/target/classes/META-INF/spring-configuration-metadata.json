@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "gupao.hello.format",
+      "type": "com.gupao.edu.autoconfiguration.HelloProperties",
+      "sourceType": "com.gupao.edu.autoconfiguration.HelloProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "gupao.hello.format.info",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "com.gupao.edu.autoconfiguration.HelloProperties"
+    }
+  ],
+  "hints": []
+}

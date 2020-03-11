@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.iot.dao.GeneratorDao">
+
+    <select id="queryTableByPaging" resultType="com.ovu.platform.generator.vo.TableVo">
+        <include refid="common.pageHead"/>
+        <include refid="getTableSql"/>
+        <include refid="common.pageBottom"/>
+    </select>
+
+    <select id="getTableTotalCount" resultType="int">
+        select count(1) from (
+        <include refid="getTableSql"/>
+        ) t1
+    </select>
+
+    <sql id="getTableSql">
+        select
+          table_name tableName,
+          table_comment tableComment,
+          engine engine,
+          create_time createTime
+        from information_schema.tables
+        <where>
+            <choose>
+                <when test="@com.ovu.platform.mybatis.util.MybatisUtil@isNotEmpty(search.databaseName)">
+                    table_schema = #{search.databaseName,jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    table_schema = (select database())
+                </otherwise>
+            </choose>
+            <if test="@com.ovu.platform.mybatis.util.MybatisUtil@isNotEmpty(search.tableName)">
+                AND table_name like CONCAT('%',#{search.tableName,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </sql>
+
+    <select id="selectColumns" resultType="com.ovu.platform.generator.vo.ColumnInfo">
+        select
+            extra extra,
+            column_name as columnName,
+            is_nullable as isNullable,
+            data_type as columnType,
+            column_comment as columnComment,
+            column_key as columnKey
+        from information_schema.columns
+        where table_name = #{search.tableName,jdbcType=VARCHAR}
+        <choose>
+            <when test="@com.ovu.platform.mybatis.util.MybatisUtil@isNotEmpty(search.databaseName)">
+                and table_schema = #{search.databaseName,jdbcType=VARCHAR} order by ordinal_position
+            </when>
+            <otherwise>
+                and table_schema = (select database()) order by ordinal_position
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getDatabases" resultType="java.lang.String">
+        show DATABASES;
+    </select>
+</mapper>

@@ -1,0 +1,124 @@
+package com.ldh.utils;
+
+
+import cn.hutool.core.util.IdUtil;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.*;
+import java.text.DecimalFormat;
+
+
+/**
+ * File工具类，扩展 hutool 工具包
+ * @author zt
+ */
+public class FileUtil extends cn.hutool.core.io.FileUtil {
+
+    /**
+     * 定义GB的计算常量
+     */
+    private static final int GB = 1024 * 1024 * 1024;
+    /**
+     * 定义MB的计算常量
+     */
+    private static final int MB = 1024 * 1024;
+    /**
+     * 定义KB的计算常量
+     */
+    private static final int KB = 1024;
+
+    /**
+     * 格式化小数
+     */
+    private static final DecimalFormat DF = new DecimalFormat("0.00");
+
+    /**
+     * MultipartFile转File
+     * @param multipartFile
+     * @return
+     */
+    public static File toFile(MultipartFile multipartFile){
+        // 获取文件名
+        String fileName = multipartFile.getOriginalFilename();
+        // 获取文件后缀
+        String prefix="."+getExtensionName(fileName);
+        File file = null;
+        try {
+            // 用uuid作为文件名，防止生成的临时文件重复
+            file = File.createTempFile(IdUtil.simpleUUID(), prefix);
+            // MultipartFile to File
+            multipartFile.transferTo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    /**
+     * 删除
+     * @param files
+     */
+    public static void deleteFile(File... files) {
+        for (File file : files) {
+            if (file.exists()) {
+                file.delete();
+            }
+        }
+    }
+
+    /**
+     * 获取文件扩展名
+     * @param filename
+     * @return
+     */
+    public static String getExtensionName(String filename) {
+        if ((filename != null) && (filename.length() > 0)) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot >-1) && (dot < (filename.length() - 1))) {
+                return filename.substring(dot + 1);
+            }
+        }
+        return filename;
+    }
+
+    /**
+     * Java文件操作 获取不带扩展名的文件名
+     * @param filename
+     * @return
+     */
+    public static String getFileNameNoEx(String filename) {
+        if ((filename != null) && (filename.length() > 0)) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot >-1) && (dot < (filename.length()))) {
+                return filename.substring(0, dot);
+            }
+        }
+        return filename;
+    }
+
+
+    /**
+     * inputStream 转 File
+     * @param ins
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    public static File inputStreamToFile(InputStream ins, String name) throws Exception{
+        File file = new File(System.getProperty("java.io.tmpdir") + File.separator + name);
+        if (file.exists()) {
+            return file;
+        }
+        OutputStream os = new FileOutputStream(file);
+        int bytesRead = 0;
+        byte[] buffer = new byte[8192];
+        while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+            os.write(buffer, 0, bytesRead);
+        }
+        os.close();
+        ins.close();
+        return file;
+    }
+
+
+
+}
