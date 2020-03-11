@@ -1,6 +1,6 @@
 2020-02-27 15:07:09.692 [restartedMain] DEBUG com.ldh.DemoApplication - Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
 2020-02-27 15:07:14.674 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@60f70f10
-2020-02-27 15:27:00.033 [http-nio-5555-exec-24] DEBUG com.zaxxer.hikari.HikariConfig - HikariPool-1 - configuration:
+2020-02-27 15:27:00.033 [http-nio-5555-exec-24] DEBUG com.zaxxer.hikari.HikariConfig - HikariPool-1 - configuration:1
 2020-02-27 15:27:00.038 [http-nio-5555-exec-24] DEBUG com.zaxxer.hikari.HikariConfig - allowPoolSuspension.............false
 2020-02-27 15:27:00.039 [http-nio-5555-exec-24] DEBUG com.zaxxer.hikari.HikariConfig - autoCommit......................true
 2020-02-27 15:27:00.039 [http-nio-5555-exec-24] DEBUG com.zaxxer.hikari.HikariConfig - catalog.........................none
